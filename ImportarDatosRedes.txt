@@ -1,0 +1,26 @@
+################ env de Fb
+source facebook/bin/activate
+
+from facebook_scraper import get_posts
+import json
+archivo6 = open('archivofacebook.json', 'w')
+for post in get_posts('coronavirus', pages=50 ):
+	json.dump(post,archivo6,default=str)
+
+
+
+
+from twitter_scraper import get_tweets
+import json
+archivo7 = open('archivotwitter.json', 'w')
+for tweet in get_tweets('#coronavirus', pages=50):
+	json.dump(tweet,archivo7,default=str)
+
+
+
+######## Separar json
+sed -i 's/}{/}\n{/g' archivofacebook.json archivotwitter.json
+
+
+
+
